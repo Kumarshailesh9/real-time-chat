@@ -71,6 +71,11 @@ Copy .env.example to .env:
 ```
 cp .env.example .env
 ```
+Or create .env file in apps/backend/.env
+```
+DATABASE_URL="mongodb+srv://username:password@cluster.8bxk.mongodb.net/ChatApp?retryWrites=true&w=majority&appName=Cluster"
+//change with your actual url mongodb atlas
+```
 
 Fill in your actual values:
 ```
