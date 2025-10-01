@@ -51,8 +51,8 @@ The app supports real-time messaging and user authentication.
 
 ### 1. Clone the repository
 ```base
-git clone <your-github-repo-link>
-cd my-monorepo
+git clone https://github.com/Kumarshailesh9/real-time-chat.git
+cd real-time-chat
 ```
 
 ### 2. Install dependencies
