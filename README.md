@@ -6,7 +6,7 @@ This is a **real-time chat application** built using:
 - **Frontend**: Next.js 15 + React 19
 - **Backend**: Node.js + Express + Prisma + Socket.IO
 - **Database**: MongoDB (managed with Prisma)
-- **Package Manager**: pnpm
+- **Package Manager**: npm
 - **Monorepo Management**: Turborepo
 
 The app supports real-time messaging and user authentication.
