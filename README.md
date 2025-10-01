@@ -57,14 +57,16 @@ cd my-monorepo
 
 ### 2. Install dependencies
 ```
-pnpm install
+npm install
 ```
 
 ### 3. Configure Environment Variables
 
-Navigate to backend:
+Navigate to backend and Generate Prisma Client
 ```
 cd apps/backend
+npx prisma generate
+
 ```
 
 Copy .env.example to .env:
@@ -82,17 +84,14 @@ Fill in your actual values:
 DATABASE_URL → MongoDB connection string (MongoDB Atlas recommended)
 ```
 
-### 4. Generate Prisma Client
-```
-pnpm --filter @myorg/backend prisma generate
-```
 
 MongoDB does not require migrations. Prisma works directly with collections.
 
 ### 5. Run the Monorepo
 From the root folder:
 ```
-pnpm turbo run dev --parallel
+cd ../../
+npm run dev
 ```
 
 This will start both the frontend and backend simultaneously:
