@@ -1,0 +1,60 @@
+// This is your Prisma schema file
+// Learn more in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model FriendRequest {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  sender     User     @relation("sentRequests", fields: [senderId], references: [id])
+  senderId   String   @db.ObjectId
+  receiver   User     @relation("receivedRequests", fields: [receiverId], references: [id])
+  receiverId String   @db.ObjectId
+  status     String   @default("pending") // pending, accepted, rejected
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model User {
+  id         String          @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  email      String          @unique
+  password   String
+  bio        String          @default("Available")
+  profilePic String          @default("https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg")
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+
+  // Friend Requests
+  sentRequests     FriendRequest[] @relation("sentRequests")
+  receivedRequests FriendRequest[] @relation("receivedRequests")
+
+  // Messages
+  messagesSent     Message[] @relation("SentMessages")
+  messagesReceived Message[] @relation("ReceivedMessages")
+}
+
+model Message {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  senderId   String   @db.ObjectId
+  receiverId String   @db.ObjectId
+  content    String
+  createdAt  DateTime @default(now())
+
+  sender   User @relation("SentMessages", fields: [senderId], references: [id])
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id])
+}
+
+model Friend {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  user1Id   String   @db.ObjectId
+  user2Id   String   @db.ObjectId
+  createdAt DateTime @default(now())
+}
+
